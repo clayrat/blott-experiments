@@ -24,7 +24,4 @@ let power_staged : nat -> [box nat -> nat] =
   | zero -> [lock fun b -> 1] 
   | suc _, p -> [lock fun b -> mult b ([unlock p] b)]  
 
-let shit : nat -> [box nat] =
-  fun x -> [lock x]  
-
 normalize [unlock power_staged 3] 2 at nat
