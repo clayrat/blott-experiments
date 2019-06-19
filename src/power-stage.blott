@@ -1,0 +1,30 @@
+; from Pfenning, "Towards Modal Type Theory"
+
+let plus : nat -> nat -> nat =
+  fun m n ->
+  rec m at _ -> nat with
+  | zero -> n
+  | suc _, p -> suc p
+
+let mult : nat -> nat -> nat = 
+  fun m n ->
+  rec m at _ -> nat with
+  | zero -> zero
+  | suc _, p -> plus n p
+
+let power_flip : nat -> nat -> nat = 
+  fun m n ->
+  rec m at _ -> nat with
+  | zero -> 1
+  | suc _, p -> mult n p
+
+let power_staged : nat -> [box nat -> nat] = 
+  fun m -> 
+  rec m at _ -> [box nat -> nat] with 
+  | zero -> [lock fun b -> 1] 
+  | suc _, p -> [lock fun b -> mult b ([unlock p] b)]  
+
+let shit : nat -> [box nat] =
+  fun x -> [lock x]  
+
+normalize [unlock power_staged 3] 2 at nat
