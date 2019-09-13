@@ -1,4 +1,4 @@
-module ConcreteSyntax
+module Blott.ConcreteSyntax
 
 %access public export
 %default total
@@ -38,7 +38,7 @@ mutual
          | Shut T
          | Uni Nat
 
-data Decl = Def Ident T T
+data Decl = Def String T T
           | NormalizeDef String
           | NormalizeTerm T T
           | Quit

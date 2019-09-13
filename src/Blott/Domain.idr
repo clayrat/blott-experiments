@@ -1,17 +1,17 @@
-module Domain
+module Blott.Domain
 
-import Syntax
+import Blott.Syntax
 
 %access public export
 %default total
 
 mutual
-  Env : Type 
+  Env : Type
   Env = List DT
-  
+
   data Clos = Cl T Domain.Env
             | ConstCl DT
-  
+
   data DT = Lam Clos
           | Neutral DT Ne
           | N
@@ -28,9 +28,9 @@ mutual
 
   data Clos2 = Cl2 T Domain.Env
   data Clos3 = Cl3 T Domain.Env
-    
+
   data Nf = Normal DT DT
-  
+
   data Ne = Var Nat -- DeBruijn levels for variables
           | Ap Ne Nf
           | Fst Ne
@@ -39,15 +39,15 @@ mutual
           | NRec Clos DT Clos2 Ne
           | J Clos3 Clos DT DT DT Ne
 
-mutual 
+mutual
   Show Clos where
     show (Cl t env) = assert_total $ "Cl(" ++ show t ++ " " ++ show env ++ ")"
-    show (ConstCl t) = assert_total $ "ConstCl(" ++ show t ++ ")" 
+    show (ConstCl t) = assert_total $ "ConstCl(" ++ show t ++ ")"
 
   Show DT where
     show (Lam cl) = "Lam(" ++ show cl ++ ")"
     show (Neutral t ne) = "Neutral(" ++ show t ++ " " ++ show ne ++ ")"
-    show  N = "Nat" 
+    show  N = "Nat"
     show  Zero = "Zero"
     show (Suc t) = "Suc(" ++ show t ++ ")"
     show (Pi t cl) = "Pi(" ++ show t ++ " " ++ show cl ++ ")"
@@ -68,7 +68,7 @@ mutual
   Show Nf where
     show (Normal tp tm) = "Normal(" ++ show tp ++ " " ++ show tm ++ ")"
 
-  Show Ne where 
+  Show Ne where
     show (Var l) = "#" ++ show l
     show (Ap ne nf) = "Ap(" ++ show ne ++ " " ++ show nf ++ ")"
     show (Fst ne) = "Fst(" ++ show ne ++ ")"

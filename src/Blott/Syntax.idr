@@ -1,27 +1,27 @@
-module Syntax
+module Blott.Syntax
 
 %access public export
 %default total
 
 data T = Var Nat -- DeBruijn indices for variables & ticks
-       | Let T {- BINDS -} T  
+       | Let T {- BINDS -} T
        | Check T T
-       | N 
-       | Zero 
-       | Suc T 
+       | N
+       | Zero
+       | Suc T
        | NRec {- BINDS -} T T {- BINDS 2 -} T T
-       | Pi T {- BINDS -} T 
-       | Lam {- BINDS -} T 
+       | Pi T {- BINDS -} T
+       | Lam {- BINDS -} T
        | Ap T T
-       | Sg T {- BINDS -} T 
-       | Pair T T 
-       | Fst T 
+       | Sg T {- BINDS -} T
+       | Pair T T
+       | Fst T
        | Snd T
-       | Id T T T 
-       | Refl T 
+       | Id T T T
+       | Refl T
        | J {- BINDS 3 -} T {- BINDS -} T T
-       | Box T 
-       | Open T 
+       | Box T
+       | Open T
        | Shut T
        | Uni Nat
 
@@ -33,7 +33,7 @@ condense  Zero   = Just Z
 condense (Suc t) = S <$> condense t
 condense  _      = Nothing
 
-Show T where 
+Show T where
   show (Var i)               = show i
   show (Let def body)        = "let " ++ show def ++ " in " ++ show body
   show (Check term tp)       = "(" ++ show term ++ " : " ++ show tp ++ ")"
