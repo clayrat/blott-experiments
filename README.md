@@ -1,3 +1,3 @@
 # blott-experiments
 
-Experiments with dependent modal types via the [blott](https://github.com/jozefg/blott) typechecker.
+Experiments with Blott, and a WIP implementation in Idris

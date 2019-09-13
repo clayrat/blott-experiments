@@ -1,0 +1,13 @@
+package blott
+
+sourcedir = src
+
+modules = Blott.Check
+        , Blott.ConcreteSyntax
+        , Blott.Domain
+        , Blott.Error
+        , Blott.Nbe
+        , Blott.Syntax
+
+pkgs = contrib, tparsec
+
